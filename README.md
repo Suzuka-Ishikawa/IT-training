@@ -1,4 +1,7 @@
 # mac環境構築
+
+<details>
+
 ## homebrew
 ### *homebrewとは*
 - MacやLinuxで使えるパッケージマネジャー（ソフトウェアをインストール・管理するための便利ツール）
@@ -206,3 +209,4 @@ docker ps
     - github desktop
     - visual studio code
 
+</details>
