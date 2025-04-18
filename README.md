@@ -1,5 +1,6 @@
 # mac環境構築
 
+クリックで表示
 <details>
 
 ## homebrew
