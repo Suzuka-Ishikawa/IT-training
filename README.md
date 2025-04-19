@@ -1,4 +1,4 @@
-# mac環境構築
+# ❶mac環境構築
 
 クリックで表示
 <details>
@@ -214,7 +214,88 @@ docker ps
 
 <br/>
 
-# git初歩
+# ❷git初歩とマークダウン
+
+クリックで表示
+<details>
+
+## SSH
+
+
 ## リポジトリ
+リポジトリ：　Gitで管理するプロジェクト（コード・ファイル・フォルダ・履歴等）の入れ物
+
+### *リポジトリの作成*
+- "New repository"を選択
+    - Repository name：プロジェクト名
+    - Description(任意)：内容の説明
+    - Public / Private：公開設定 *（後で変更可能）*
+    - **Initialize this repository with "README file"** ：READMEファイル（説明書）を作る場合チェック☑️
+
+
 
 ## clone
+- リモート上のリポジトリをローカルに履歴やブランチごとコピーすること
+    - 特徴：　ローカルで編集可、バックアップ、バージョン管理
+
+## commit
+- ローカルリポジトリ内で変更を保存する操作
+    - ファイルの状態、作成者、タイムスタンプなどの情報をもつ
+    - コミットメッセージ：変更点を説明するコメントで、履歴を振り返るときに大事
+
+## push
+- commitをリモートリポジトリに送信する操作
+    - 共有、バックアップになる
+
+<br/>
+
+### *Clone〜Pushまでの流れ　【GitHub Desktopで】*
+[コマンドで行う場合はコチラ](#clonepushまでの流れgitコマンドで)
+
+＜Clone＞
+
+    1. GitHub Desktopを開き、GitHubアカウントでログイン
+
+    2. - 既存リポジトリがない場合
+
+            "Clone a repository from the Internet"を選択
+       - 他のリポジトリがある場合
+
+            左上のメニューバーからFile >Clone Repositoryを選択
+
+    3. タブからGitHub.com　>　リポジトリ一覧からクローンしたいリポジトリを選択
+    4. ”Local Path”からローカル上でのコピー先を選択
+    5. クローンが完了するとGitHub Desktopの画面がクローンしたリポジトリの管理画面に切り替わる
+
+＜commit＞
+
+    1. 編集したファイルを保存（必須）
+
+    2. GitHub Desktopを開き、保存した変更点が表示されていることを確認（なければページ上部から更新）
+
+    3. 画面左下のCommit Massage（Summary）を記入
+
+    4. ”Commit to main”をクリックする
+
+＜push＞
+
+    1. GitHub Desktopの画面右上に、Push
+
+    2. - 既存リポジトリがない場合
+
+            "Clone a repository from the Internet"を選択
+       - 他のリポジトリがある場合
+
+            左上のメニューバーからFile >Clone Repositoryを選択
+
+    3. タブからGitHub.com　>　リポジトリ一覧からクローンしたいリポジトリを選択
+    4. ”Local Path”からローカル上でのコピー先を選択
+    5. クローンが完了するとGitHub Desktopの画面がクローンしたリポジトリの管理画面に切り替わる
+
+<br/>
+
+### *Clone〜Pushまでの流れ　【Gitコマンドで】*
+
+
+
+</details>
