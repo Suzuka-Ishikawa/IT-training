@@ -219,8 +219,67 @@ docker ps
 クリックで表示
 <details>
 
-## SSH
+## SSH（Secure Shell）
+- ネットワークを通じて別のPCと安全に通信するためのプロトコル、SSH鍵ペア（**公開鍵＆秘密鍵**）で認証
+- 特徴：暗号化通信、リモートアクセス、トンネリング（他のHTTPなどのプロトコルの通信も安全に）
+- **GitHubなど、リモートローカル間でデータをやり取りするにはSSH認証が必要**
+- 一般的にHTTPSより安全
 
+**※HTTPS**　ーもう一つの認証方法
+- アクセスのたびにユーザー名とパスワード（アクセストークン）を使って認証
+- **Web通信**を安全にするために使う
+
+<br/>
+
+### *SSH接続の設定*
+#### SSH鍵の作成
+1. SShキーを入れるフォルダ（デフォルト）に移動
+   ```
+   $cd ~/.ssh
+    ```
+2. コマンドでSSH鍵ペアを生成する
+    ```
+    ssh-keygen -t rsa
+    ```
+
+3. 鍵の保存場所がデフォルトの`~/.ssh/id_rsa `になっていることを確認
+4. パスワードの設定（入力が見えないので注意）
+5. 任意でパスフレーズを設定（しない場合はエンター）
+
+6. 以下のように生成される
+
+   <img src="https://prog-8.com/shared/images/document/34/165533606243.png" width="50%">
+引用 > https://prog-8.com/docs/git-env
+
+7. .sshファイル内に鍵が作成できていることを確認
+```
+ls ~/.ssh
+```
+
+#### SSH公開鍵の登録（GitHub）
+
+1. SShキーのフォルダ（デフォルト）に移動
+   ```
+   $cd ~/.ssh
+    ```
+2. 公開鍵ファイル内容の閲覧
+    ```
+    cat id_rsa.pub
+    ```
+3. `ssh-rsa`から始まり、メールアドレスで終わる長い文字列が公開鍵
+4. GitHubにログインし、「Setting > SSH and GPG keys >  New SSH key」へ
+
+   Keyフィールドに先程の公開鍵をコピペ⇨「Add SSH Key」
+5. 接続の確認
+   ```
+   ssh -T git@github.com
+   ```
+   接続できていれば以下メッセージが表示
+   ```
+   Hi <Your GitHub Username>! You've successfully authenticated,...
+   ```
+
+<br/>
 
 ## リポジトリ
 リポジトリ：　Gitで管理するプロジェクト（コード・ファイル・フォルダ・履歴等）の入れ物
@@ -255,32 +314,49 @@ docker ps
 ＜はじめに＞
 必要に応じて、ローカル上にGitのリポジトリ（履歴を管理する場所）を作成する。
 - プロジェクトのフォルダ内で実行すると、”.git”という隠しフォルダが作成される。（これはバージョン管理に必要な情報を記録する）
-- コマンドは以下
+- コマンドは以下⇩
     ```
     git init
     ```
 
 ＜Clone＞
 
+すでにリモート環境にあるリポジトリを履歴ごとローカルにコピー⇩
 ```
-Git clone *repositoryのURL*
+Git clone <repositoryのURL>
 ```
 
 ＜commit＞
 
-1. 編集したファイルを保存（必須）
+1. commitの準備として、記録したい変更を指定する(ステージング)
+```
+#変更したファイル名を指定
+git add <file>
 
-2. GitHub Desktopを開き、保存した変更点が表示されていることを確認
+#現在のフォルダとその中のすべての変更をまとめて指定
+git add .
+```
 
-3. 画面左下のCommit Massage（Summary）を記入
-
-4. ”Commit to main”をクリックする
+2. ステージングした変更をリポジトリに記録（＝Commit）
+```
+git commit -m "<commit message>"
+```
 
 ＜push＞
 
-1. GitHub Desktopの画面右上にある"Push origin" をクリック
+1. ローカルとリモートの接続を設定(リモートリポジトリ名の`<name>`は、通常は`origin`)
+```
+git remote add <name> <remote_repository_url>
+```
 
-2. GitHub上で変更点が反映されていれば成功
+2. commitをpush（`<branch＿name>`は送信したいブランチ名、mainやmasterなど）
+
+```
+git push <remote_name> <branch_name>
+
+#通常は
+git push origin main
+```
 
 <br/>
 
