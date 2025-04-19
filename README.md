@@ -249,53 +249,74 @@ docker ps
 
 <br/>
 
-### *Clone〜Pushまでの流れ　【GitHub Desktopで】*
+### *Clone〜Pushまでの流れ　【GitHub Desktop ver.】*
 [コマンドで行う場合はコチラ](#clonepushまでの流れgitコマンドで)
+
+＜はじめに＞
+必要に応じて、ローカル上にGitのリポジトリ（履歴を管理する場所）を作成する。
+- プロジェクトのフォルダ内で実行すると、”.git”という隠しフォルダが作成される。（これはバージョン管理に必要な情報を記録する）
+- コマンドは以下
+    ```
+    git init
+    ```
 
 ＜Clone＞
 
-    1. GitHub Desktopを開き、GitHubアカウントでログイン
-
-    2. - 既存リポジトリがない場合
-
-            "Clone a repository from the Internet"を選択
-       - 他のリポジトリがある場合
-
-            左上のメニューバーからFile >Clone Repositoryを選択
-
-    3. タブからGitHub.com　>　リポジトリ一覧からクローンしたいリポジトリを選択
-    4. ”Local Path”からローカル上でのコピー先を選択
-    5. クローンが完了するとGitHub Desktopの画面がクローンしたリポジトリの管理画面に切り替わる
+```
+Git clone *repositoryのURL*
+```
 
 ＜commit＞
 
-    1. 編集したファイルを保存（必須）
+1. 編集したファイルを保存（必須）
 
-    2. GitHub Desktopを開き、保存した変更点が表示されていることを確認（なければページ上部から更新）
+2. GitHub Desktopを開き、保存した変更点が表示されていることを確認
 
-    3. 画面左下のCommit Massage（Summary）を記入
+3. 画面左下のCommit Massage（Summary）を記入
 
-    4. ”Commit to main”をクリックする
+4. ”Commit to main”をクリックする
 
 ＜push＞
 
-    1. GitHub Desktopの画面右上に、Push
+1. GitHub Desktopの画面右上にある"Push origin" をクリック
 
-    2. - 既存リポジトリがない場合
-
-            "Clone a repository from the Internet"を選択
-       - 他のリポジトリがある場合
-
-            左上のメニューバーからFile >Clone Repositoryを選択
-
-    3. タブからGitHub.com　>　リポジトリ一覧からクローンしたいリポジトリを選択
-    4. ”Local Path”からローカル上でのコピー先を選択
-    5. クローンが完了するとGitHub Desktopの画面がクローンしたリポジトリの管理画面に切り替わる
+2. GitHub上で変更点が反映されていれば成功
 
 <br/>
 
-### *Clone〜Pushまでの流れ　【Gitコマンドで】*
+### *Clone〜Pushまでの流れ　【Gitコマンドver.】*
 
+＜Clone＞
 
+1. GitHub Desktopを開き、GitHubアカウントでログイン
+
+2. - 既存リポジトリがない場合
+
+     "Clone a repository from the Internet"を選択
+   - 他のリポジトリがある場合
+
+        左上のメニューバーからFile >Clone Repositoryを選択
+
+3. タブからGitHub.com　>　リポジトリ一覧からクローンしたいリポジトリを選択
+4. ”Local Path”からローカル上でのコピー先を選択
+5. クローンが完了するとGitHub Desktopの画面がクローンしたリポジトリの管理画面に切り替わる
+
+＜commit＞
+
+1. 編集したファイルを保存（必須）
+
+2. GitHub Desktopを開き、保存した変更点が表示されていることを確認
+
+3. 画面左下のCommit Massage（Summary）を記入
+
+4. ”Commit to main”をクリックする
+
+＜push＞
+
+1. GitHub Desktopの画面右上にある"Push origin" をクリック
+
+2. GitHub上で変更点が反映されていれば成功
+
+<br/>
 
 </details>
