@@ -311,7 +311,7 @@ ls ~/.ssh
 <br/>
 
 ### *Clone〜Pushまでの流れ　【GitHub Desktop ver.】*
-[コマンドで行う場合はコチラ](#clonepushまでの流れgitコマンドで)
+[terminal(コマンド)で行う場合はコチラ](#clonepushまでの流れgitコマンドver)
 
 ＜はじめに＞
 必要に応じて、ローカル上にGitのリポジトリ（履歴を管理する場所）を作成する。
