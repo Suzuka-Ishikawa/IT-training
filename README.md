@@ -562,6 +562,8 @@ vim：テキストエディタviの拡張版、高い拡張性と軽い動作
 
     
     ⚠️たとえファイルアクセス権限があっても、そのファイルのあるディレクトリのxがないと操作できない！
+> [!NOTE]
+> Useful information that users should know, even when skimming content.
 
 <br/>
 
