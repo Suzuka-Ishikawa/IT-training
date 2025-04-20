@@ -246,7 +246,8 @@ docker ps
 
 6. 以下のように生成される
 
-   <img src="https://prog-8.com/shared/images/document/34/165533606243.png" width="50%">
+<img src="https://prog-8.com/shared/images/document/34/165533606243.png" width="50%">
+
 引用 > https://prog-8.com/docs/git-env
 
 7. .sshファイル内に鍵が作成できていることを確認
