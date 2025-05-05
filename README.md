@@ -1212,6 +1212,9 @@ HEAD：最新のコミット
 
 ## HTMLを表示する
 ①ローカル上で直接開く
+
+![イメージ①](https://github.com/Suzuka-Ishikawa/IT-training/blob/main/img/web%E4%BB%95%E7%B5%84%E3%81%BF%E2%91%A0.png)
+
 HTMLファイルを検索バーにドラッグor Finderで開く
 
 ```
@@ -1220,6 +1223,10 @@ file:///Users/…
 ```
 
 ②ローカルにnginxを導入
+
+![イメージ②](https://github.com/Suzuka-Ishikawa/IT-training/blob/main/img/Web%E4%BB%95%E7%B5%84%E3%81%BF%E2%91%A1.png)
+
+
 1. Homebrewを通してnginxをインストール⇨起動
    ```
    brew install nginx
@@ -1248,6 +1255,9 @@ file:///Users/…
    ```
 
 ③Dockerでnginxコンテナを起動
+
+![イメージ③](https://github.com/Suzuka-Ishikawa/IT-training/blob/main/img/Web%E4%BB%95%E7%B5%84%E3%81%BF%E2%91%A2.png)
+
 1. Dockerデスクトップを起動
 2. nginx公式イメージをインストール
    ```
