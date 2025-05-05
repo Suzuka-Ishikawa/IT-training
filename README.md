@@ -1173,6 +1173,9 @@ HEAD：最新のコミット
 ## HTML
 - Webページを作成するためのマークアップ言語（＝テキストを<>で囲むことで役割を定義する）
 - HTML5は最新主要バージョン
+
+
+### HTMLを書く
 ```
 <!DOCTYPE html>　＃HTML5であることを宣言
 <html lang="ja">
@@ -1188,6 +1191,7 @@ HEAD：最新のコミット
 </body>
 </html>
 ```
+
 
 ## HTTP/HTTPS
 - WebブラウザとWebサーバーがやり取りするための通信プロトコル（規約）
@@ -1206,7 +1210,76 @@ HEAD：最新のコミット
 - ステートレス：過去のリクエストやレスポンスの履歴は保持しない⇨保持するには別でCookie等を用いる
 - HTTPS：暗号化したもの
 
+## HTMLを表示する
+①ローカル上で直接開く
+HTMLファイルを検索バーにドラッグor Finderで開く
 
+```
+# fileプロトコル：ファイルシステムを介してローカルと直接やり取り
+file:///Users/…
+```
+
+②ローカルにnginxを導入
+1. Homebrewを通してnginxをインストール⇨起動
+   ```
+   brew install nginx
+   brew services start nginx
+   ```
+2. nginx設定ファイルを開き、http>server>rootを確認（ここがアクセス先になる）
+3. 必要に応じて設定を変更
+   ```
+   vim /usr/local/etc/nginx/nginx.conf
+
+   # rootの後がパス、indexの後が最初に探すファイル名
+   root   /Users/brainsadmin20250401/Documents;
+            index  index.html index.htm test.html;
+   ```
+4. 設定のテスト（構文エラーがないか）
+   ```
+   sudo nginx -t
+   ```
+5. 変更を反映（リロード）
+   ```
+   brew services reload nginx
+   ```
+6. ブラウザでアクセス
+   ```
+   http://localhost:8080/test.html
+   ```
+
+③Dockerでnginxコンテナを起動
+1. Dockerデスクトップを起動
+2. nginx公式イメージをインストール
+   ```
+   docker pull nginx
+   ```
+3. 「ポートマッピング」＋「目的のファイルとバインドマウント」したコンテナを起動する
+   ```
+   docker run -it -d -p 8080:80 --name test_nginx4 -v /Users/brainsadmin20250401/Documents://usr/share/nginx/html nginx:latest
+   ```
+4. ②と同じく`localhost:8080`からのドメインで検索
+   ```
+   http://localhost:8080/test.html
+   ```
+
+### Dockerでのnginx起動が便利な理由
+nginxを直接OSにインストールしてしまうと…
+- nginx本体をアンインストールしても、設定ファイル等が残ってしまう（バグを起こすことも）
+
+## Dockerのポートマッピング
+- 隔離されたコンテナのポートと、ホストOSの特定のポートを関連づける
+- ホストOSからhttp://localhost:8080 にアクセスすると、コンテナ内のWebサーバーに接続
+  ```
+  docker run -p 8080:80 my-web-app
+  ```
+
+## file/HTTPプロトコルの違い
+- `file:///`
+  - ローカル上のファイルシステムに直アクセス
+  - 直接ファイルを読み込みレンダリング（＝Webサーバーを介さない）
+- `HTTP`
+  - WebサーバーとWebブラウザが通信するためのプロトコル
+  - `localhost`の場合は、ローカル上（PCなどのコンピュータ）で動作しているWebサーバーに対してリクエスト
 
 </details>
 
