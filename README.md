@@ -1317,6 +1317,54 @@ nginxを直接OSにインストールしてしまうと…
 
 ## Dockerfileの作成
 
+```
+# ベースイメージを指定
+FROM ubuntu:20.04
+
+# 作業ディレクトリを/appに設定（/appはコンテナ上の慣例的な作業ディレクトリ）
+WORKDIR /app
+
+# 環境変数を表示するスクリプトをコピー
+COPY . .
+
+# vimをインストール
+RUN apt-get update && \
+    apt-get install -y vim
+
+# スクリプトを実行するコマンド
+CMD ["./IT-training"]
+```
+
+## HTMlの作成
+
+```
+<!DOCTYPE html>　＃HTML5であることを宣言
+<html lang="ja"> ＃ページで利用する言語を指定
+<head>　＃画面表示されない設定（文字コード・タブのタイトルなど）
+    <meta charset="UTF-8">　＃文字エンコーディング（文字の正しい表示）
+    <title>IT-training</title>　＃タブに表示されるタイトル（SEOに重要）
+　　<link rel="stylesheet" href="styles.css">　＃CSSファイル（今回はstyles.css）の読み込み
+　　<link rel="icon" href="favicon.ico"> ＃ファビコン（タブのアイコン）の指定
+　　<script src="script.js"></script>　＃JavaScriptファイルの読み込み
+</head>
+<body>
+　　<div class="container">　＃divで段落わけ、containerという名前のclass名を適用
+   　　 <h1>シンプルToDo</h1>　＃見出し、数字が小さいほど強調
+
+        <div class="input-area">　＃新しいタスクの入力欄とボタンを段落化
+            <input type="text" id="taskInput" placeholder="新しいタスクを入力">　＃タスク入
+力のテキストボックス（idはJSから参照するときに使う）
+            <button id="addTaskBtn">追加</button>　＃タスク追加用ボタン
+        </div>
+
+        <ul class="task-list" id="taskList">　＃タスク表示の順序なしリスト
+            </ul>
+    </div>
+
+</body>
+</html>
+```
+
 </details>
 
 <br/>
