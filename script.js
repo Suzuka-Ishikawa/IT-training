@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
  // アニメーションの実行
     function startAnimation() {
-        // 木を動かす（例：左に移動）
+        // 木を動かす（左右に移動）
         treeLeft.style.transform = 'translateX(-100%)';
         treeRight.style.transform = 'translateX(100%)';
 
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
     container.style.transition = 'opacity 1s ease-in-out, transform 1s ease-in-out';
 
     // ページのロード後、少し遅れてアニメーション開始
-    setTimeout(startAnimation, 500);
+    setTimeout(startAnimation, 800);
 
     // ローカルストレージからタスクを読み込む関数（tasksというキーで保存されているタスクのJSON文字列を読み込む）
     function loadTasks() {
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Enterキーでのタスク追加
+    // Enterキーでもタスク追加を可能に（タスク追加ボタンをクリックしたときと同じ処理を実行）
     taskInput.addEventListener('keypress', (event) => {
         if (event.key === 'Enter') {
             addTaskBtn.click();
