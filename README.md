@@ -1469,10 +1469,20 @@ Webページに動きのある機能を追加
 
    docker run -d -it --name web_test -h dirtest -p 8082:80 --mount type=bind,src=/home/ishikawa/Web,dst=/app suzukai/it-training:latest
    ```
-4. パブリックIPアドレスを確認しアクセス
+4. ブラウザでアクセス
+   ```
+   http://57.180.48.167:<ホストのポート番号＞/
+   ```
+　またはパブリックIPアドレスを確認しアクセス
    ```
    curl -s ifconfig.me
    ```
+
+## どうしても変更が反映されないとき
+イメージ名・ポート番号等を新たに設定し、新しくコンテナ作り直す（上記の手順を一周する）
+
+
+### ローカルストレージ
 
 <br/>
 
