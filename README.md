@@ -1324,18 +1324,34 @@ FROM ubuntu:20.04
 # 作業ディレクトリを/appに設定（/appはコンテナ上の慣例的な作業ディレクトリ）
 WORKDIR /app
 
-# 環境変数を表示するスクリプトをコピー
-COPY . .
+# パッケージリストを更新
+RUN apt-get update
 
 # vimをインストール
 RUN apt-get update && \
     apt-get install -y vim
 
-# スクリプトを実行するコマンド
-CMD ["./IT-training"]
+# Nginxをインストール
+RUN apt-get install -y nginx
+
+# ローカルのファイルをコンテナ内の/appディレクトリにコピー
+COPY . /app/
+
+# Nginxのデフォルトの公開ディレクトリを削除
+RUN rm -rf /var/www/html
+
+# /appの内容をNginxのデフォルトの公開ディレクトリにシンボリックリンク（nginxが/appのファイルを参照できる）
+RUN ln -s /app /var/www/html
+
+# 公開するポートを指定（HTTPのデフォルトポート）
+EXPOSE 80
+
+# スクリプトを実行するコマンド（今回はnginxを起動）
+CMD ["nginx", "-g", "daemon off;"]
 ```
 
 ## HTMlの作成
+ページの基本構造
 
 ```
 <!DOCTYPE html>　＃HTML5であることを宣言
@@ -1365,6 +1381,82 @@ CMD ["./IT-training"]
 </html>
 ```
 
+## CSSの作成
+Webページの基本的な見た目を定義
+```
+
+```
+
+## JavaScriptの作成
+Webページに動きのある機能を追加
+```
+```
+
+※作成したDockerfileは、ルートディレクトリ上（HTML、CSS、JSファイルがある場所）におく
+
+## ローカルのDockerでの実装
+1. Dockerイメージのビルド
+   ターミナル上でDockerfileのあるディレクトリに移動しビルド
+   ```
+   docker build -t <your_image_name> .
+
+   # ビルドされたか確認
+   docker images
+   ```
+2. Dockerコンテナの実行
+   ```
+   #ホストマシンが8080ポートをコンテナの80番ポートにマッピング
+   docker run -d -p 8080:80 <your_image_name>
+   ```
+3. ブラウザで`http://localhost:8080`にアクセスしてWebページが閲覧できるか確認
+
+<br/>
+
+## リモートのDockerでの実装
+1. Dockerイメージにタグ付け
+   ```
+   docker tag <your_image_name> <your_dockerhub_username>/<your_repository_name>:latest
+   ```
+2. DockerHubのリポジトリにdockerイメージをプッシュ
+   ```
+   docker push <your_dockerhub_username>/<your_repository_name>:latest
+   ```
+
+3. EC2インスタンスの起動・接続
+   ```
+   ssh -i ~/.ssh/training-2025-ishikawa.pem ishikawa@57.180.48.167
+   ```
+4. EC2インスタンス上にイメージをプル
+   ```
+   docker pull <your_dockerhub_username>/<your_repository_name>:latest
+   ```
+5. Dockerコンテナの実行
+   ```
+   #EC2インスタンスの80番ポートをコンテナの80番ポートにマッピング
+   docker run -d --name IT-training -p 80:80 <your_dockerhub_username>/<your_repository_name>:latest
+   ```
+6. EC2インスタンスのパブリックIPアドレスを確認→ブラウザで表示
+   ```
+   curl -s ifconfig.me
+   ```
+
+## 構成ファイルの編集（イメージの再ビルド）
+1. ファイルを編集
+2. これまで同様にイメージをビルド
+   ```
+   docker build -t <your_image_name> .
+   ```
+3. 古いコンテナを停止・削除
+   ```
+   docker stop <container_id>
+   docker rm <container_id>
+   ```
+4. 再ビルドしたイメージを用いてコンテナを起動
+
+## 構成ファイルの編集（ボリュームマウント）
+毎回イメージの再ビルドをするのは非効率
+
+→ホストマシンのディレクトリをコンテナにマウント
 </details>
 
 <br/>
