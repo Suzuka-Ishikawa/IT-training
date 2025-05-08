@@ -3,6 +3,36 @@ document.addEventListener('DOMContentLoaded', () => {
     const taskInput = document.getElementById('taskInput');
     const addTaskBtn = document.getElementById('addTaskBtn');
     const taskList = document.getElementById('taskList');
+    const treeLeft = document.getElementById('tree-left');
+    const treeRight = document.getElementById('tree-right');
+    const squirrel = document.getElementById('squirrel');
+    const owl = document.getElementById('owl');
+    const container = document.querySelector('.container');
+
+ // アニメーションの実行
+    function startAnimation() {
+        // 木を動かす（例：左に移動）
+        treeLeft.style.transform = 'translateX(-100%)';
+        treeRight.style.transform = 'translateX(100%)';
+
+        // ToDoリストを表示
+        container.style.opacity = 1;
+        container.style.transform = 'translateY(0)';
+
+        // 動物を表示
+        squirrel.style.opacity = 1;
+        owl.style.opacity = 1;
+    }
+
+    // 初期状態の設定
+    treeLeft.style.transition = 'transform 2s ease-in-out';
+    treeRight.style.transition = 'transform 2s ease-in-out';
+    container.style.opacity = 0;
+    container.style.transform = 'translateY(50px)';
+    container.style.transition = 'opacity 1s ease-in-out, transform 1s ease-in-out';
+
+    // ページのロード後、少し遅れてアニメーション開始
+    setTimeout(startAnimation, 500);
 
     // ローカルストレージからタスクを読み込む関数（tasksというキーで保存されているタスクのJSON文字列を読み込む）
     function loadTasks() {
