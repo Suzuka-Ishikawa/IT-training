@@ -1433,7 +1433,7 @@ Webページに動きのある機能を追加
 5. Dockerコンテナの実行
    ```
    #EC2インスタンスの80番ポートをコンテナの80番ポートにマッピング
-   docker run -d --name IT-training -p 80:80 <your_dockerhub_username>/<your_repository_name>:latest
+   docker run -d -it --name IT-training -p 80:80 <your_dockerhub_username>/<your_repository_name>:latest
    ```
 6. EC2インスタンスのパブリックIPアドレスを確認→ブラウザで表示
    ```
@@ -1453,10 +1453,30 @@ Webページに動きのある機能を追加
    ```
 4. 再ビルドしたイメージを用いてコンテナを起動
 
-## 構成ファイルの編集（ボリュームマウント）
+## 構成ファイルの編集（マウント）
 毎回イメージの再ビルドをするのは非効率
 
 →ホストマシンのディレクトリをコンテナにマウント
+
+1. ローカルのディレクトリをインスタンス上に転送
+   ```
+   scp -r -i ~/.ssh/training-2025-ishikawa.pem ~/Documents/GitHub/S.I ishikawa@57.180.48.167:~/Web/
+   ```
+2. インスタンス環境上に移動
+3. バインドマウント・ポートマッピングしたコンテナを起動
+   ```
+   #最初に実行するコマンド（CMD）はDockerfile上で指定しているため、/bin/bashなどは付けない
+
+   docker run -d -it --name web_test -h dirtest -p 8082:80 --mount type=bind,src=/home/ishikawa/Web,dst=/app suzukai/it-training:latest
+   ```
+4. パブリックIPアドレスを確認しアクセス
+   ```
+   curl -s ifconfig.me
+   ```
+
+<br/>
+
+
 </details>
 
 <br/>
