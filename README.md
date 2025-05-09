@@ -1317,80 +1317,18 @@ nginxを直接OSにインストールしてしまうと…
 
 ## Dockerfileの作成
 [Dockerfileはこちら](https://github.com/Suzuka-Ishikawa/IT-training/blob/main/Dockerfile)
-```
-# ベースイメージを指定
-FROM ubuntu:20.04
-
-# 作業ディレクトリを/appに設定（/appはコンテナ上の慣例的な作業ディレクトリ）
-WORKDIR /app
-
-# パッケージリストを更新
-RUN apt-get update
-
-# vimをインストール
-RUN apt-get update && \
-    apt-get install -y vim
-
-# Nginxをインストール
-RUN apt-get install -y nginx
-
-# ローカルのファイルをコンテナ内の/appディレクトリにコピー
-COPY . /app/
-
-# Nginxのデフォルトの公開ディレクトリを削除
-RUN rm -rf /var/www/html
-
-# /appの内容をNginxのデフォルトの公開ディレクトリにシンボリックリンク（nginxが/appのファイルを参照できる）
-RUN ln -s /app /var/www/html
-
-# 公開するポートを指定（HTTPのデフォルトポート）
-EXPOSE 80
-
-# スクリプトを実行するコマンド（今回はnginxを起動）
-CMD ["nginx", "-g", "daemon off;"]
-```
 
 ## HTMlの作成
 ページの基本構造
-
-```
-<!DOCTYPE html>　＃HTML5であることを宣言
-<html lang="ja"> ＃ページで利用する言語を指定
-<head>　＃画面表示されない設定（文字コード・タブのタイトルなど）
-    <meta charset="UTF-8">　＃文字エンコーディング（文字の正しい表示）
-    <title>IT-training</title>　＃タブに表示されるタイトル（SEOに重要）
-　　<link rel="stylesheet" href="styles.css">　＃CSSファイル（今回はstyles.css）の読み込み
-　　<link rel="icon" href="favicon.ico"> ＃ファビコン（タブのアイコン）の指定
-　　<script src="script.js"></script>　＃JavaScriptファイルの読み込み
-</head>
-<body>
-　　<div class="container">　＃divで段落わけ、containerという名前のclass名を適用
-   　　 <h1>シンプルToDo</h1>　＃見出し、数字が小さいほど強調
-
-        <div class="input-area">　＃新しいタスクの入力欄とボタンを段落化
-            <input type="text" id="taskInput" placeholder="新しいタスクを入力">　＃タスク入
-力のテキストボックス（idはJSから参照するときに使う）
-            <button id="addTaskBtn">追加</button>　＃タスク追加用ボタン
-        </div>
-
-        <ul class="task-list" id="taskList">　＃タスク表示の順序なしリスト
-            </ul>
-    </div>
-
-</body>
-</html>
-```
+[index.htmlはこちら](https://github.com/Suzuka-Ishikawa/IT-training/blob/main/index.html)
 
 ## CSSの作成
 Webページの基本的な見た目を定義
-```
-
-```
+[style.cssはこちら](https://github.com/Suzuka-Ishikawa/IT-training/blob/main/styles.css)
 
 ## JavaScriptの作成
 Webページに動きのある機能を追加
-```
-```
+[script.jsはこちら](https://github.com/Suzuka-Ishikawa/IT-training/blob/main/script.js)
 
 ※作成したDockerfileは、ルートディレクトリ上（HTML、CSS、JSファイルがある場所）におく
 
