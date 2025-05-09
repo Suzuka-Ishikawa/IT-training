@@ -1478,6 +1478,9 @@ Webページに動きのある機能を追加
    ```
    #ホストのポート番号に注意（重複ないように）
    docker run -d -it --name <コンテナ名> <ホストポート番号>:80 <GitHubユーザー名>/<タグ>:latest
+
+   #バインドマウントも行う場合
+   docker run -d -it --name web_test -h dirtest -p 8082:80 --mount type=bind,src=/home/ishikawa/Web,dst=/app suzukai/it-training:latest
    ```
 10. `docker ps`でコンテナの状況を確認
 11. ブラウザでアクセスして確認
