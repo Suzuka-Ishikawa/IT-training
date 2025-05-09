@@ -1496,34 +1496,43 @@ Webページに動きのある機能を追加
 イメージ名・ポート番号等を新たに設定し、新しくコンテナ作り直す（上記の手順を一周する）
 
 1. ローカルのDockerfileのあるディレクトリに移動
-2. イメージをビルド
+2. ローカルのディレクトリをリモートへ転送（必要に応じて）
+   ```
+   ssh -i ~/.ssh/training-2025-ishikawa.pem ishikawa@57.180.48.167
+   ```
+3. イメージをビルド
    ```
    docker build -t todo3 .
    ```
-3. ローカルでDockerコンテナ起動、確認
+4. ローカルでDockerコンテナ起動、確認
    ```
    #ホストのポート番号注意
    docker run -d -p 8084:80 todo3
    ```
-4. イメージにタグをつける
+5. イメージにタグをつける
    ```
-   docker tag todo3 suzukai/it-trai
-   ning:latest
+   docker tag todo3 <GitHubユーザー名>/<タグ>:latest
    ```
-5. タグをつけたイメージをDocker Hubにプッシュ
+6. タグをつけたイメージをDocker Hubにプッシュ
    ```
-   docker push suzukai/it-training:latest
+   docker push <GitHubユーザー名>/<タグ>:latest
    ```
-6. インスタンス環境にログイン
-7. インスタンス上でイメージをプル
+7. インスタンス環境にログイン
+8. インスタンス上でイメージをプル
    ```
-   docker pull suzukai/it-training:latest
+   docker pull <GitHubユーザー名>/<タグ>:latest
    ```
-8. コンテナを起動
+9.  コンテナを起動
    ```
    #ホストのポート番号に注意（重複ないように）
-   docker run -d -it --name web_container1 -p 8085:80 suzukai/it-training:latest
+   docker run -d -it --name <コンテナ名> <ホストポート番号>:80 <GitHubユーザー名>/<タグ>:latest
    ```
+10. `docker ps`でコンテナの状況を確認
+11. ブラウザでアクセスして確認
+    - 今回（5/9の研修発表）のホストポートは20089
+    ```
+    http://<リモート環境のIPアドレスまたはDNS名>:<ホスト側のポート>/
+    ```
 
 </details>
 
