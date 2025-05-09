@@ -1316,7 +1316,7 @@ nginxを直接OSにインストールしてしまうと…
 <br/>
 
 ## Dockerfileの作成
-
+[Dockerfileはこちら](https://github.com/Suzuka-Ishikawa/IT-training/blob/main/Dockerfile)
 ```
 # ベースイメージを指定
 FROM ubuntu:20.04
