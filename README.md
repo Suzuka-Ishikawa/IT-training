@@ -1494,6 +1494,7 @@ Webページに動きのある機能を追加
 ※混乱してしまったら諦めて作り直す⇩
 <details><summary>クリックで表示</summary>
 イメージ名・ポート番号等を新たに設定し、新しくコンテナ作り直す（上記の手順を一周する）
+
 1. ローカルのDockerfileのあるディレクトリに移動
 2. イメージをビルド
    ```
@@ -1523,6 +1524,7 @@ Webページに動きのある機能を追加
    #ホストのポート番号に注意（重複ないように）
    docker run -d -it --name web_container1 -p 8085:80 suzukai/it-training:latest
    ```
+
 </details>
 
 <br/>
