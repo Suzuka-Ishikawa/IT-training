@@ -1316,24 +1316,30 @@ nginxを直接OSにインストールしてしまうと…
 <br/>
 
 ## Dockerfileの作成
+今回はnginxを設定する
+
 [Dockerfileはこちら](https://github.com/Suzuka-Ishikawa/IT-training/blob/main/Dockerfile)
 
 ## HTMlの作成
 ページの基本構造
+
 [index.htmlはこちら](https://github.com/Suzuka-Ishikawa/IT-training/blob/main/index.html)
 
 ## CSSの作成
 Webページの基本的な見た目を定義
+
 [style.cssはこちら](https://github.com/Suzuka-Ishikawa/IT-training/blob/main/styles.css)
 
 ## JavaScriptの作成
 Webページに動きのある機能を追加
+
 [script.jsはこちら](https://github.com/Suzuka-Ishikawa/IT-training/blob/main/script.js)
 
 ※作成したDockerfileは、ルートディレクトリ上（HTML、CSS、JSファイルがある場所）におく
 
 ## ローカルのDockerでの実装
-1. Dockerイメージのビルド
+1. HTML、CSS、JSファイル、Dockerfileをディレクトリ内に用意
+2. Dockerイメージのビルド
    ターミナル上でDockerfileのあるディレクトリに移動しビルド
    ```
    docker build -t <your_image_name> .
@@ -1341,41 +1347,45 @@ Webページに動きのある機能を追加
    # ビルドされたか確認
    docker images
    ```
-2. Dockerコンテナの実行
+3. Dockerコンテナの実行
    ```
    #ホストマシンが8080ポートをコンテナの80番ポートにマッピング
    docker run -d -p 8080:80 <your_image_name>
    ```
-3. ブラウザで`http://localhost:8080`にアクセスしてWebページが閲覧できるか確認
+4. ブラウザで`http://localhost:8080`にアクセスしてWebページが閲覧できるか確認
 
 <br/>
 
 ## リモートのDockerでの実装
-1. Dockerイメージにタグ付け
+1. ローカルのディレクトリをリモートへ転送（必要に応じて）
+   ```
+   ssh -i ~/.ssh/training-2025-ishikawa.pem ishikawa@57.180.48.167
+   ```
+2. Dockerイメージにタグ付け
    ```
    docker tag <your_image_name> <your_dockerhub_username>/<your_repository_name>:latest
    ```
-2. DockerHubのリポジトリにdockerイメージをプッシュ
+3. DockerHubのリポジトリにdockerイメージをプッシュ
    ```
    docker push <your_dockerhub_username>/<your_repository_name>:latest
    ```
 
-3. EC2インスタンスの起動・接続
+4. EC2インスタンスの起動・接続
    ```
    ssh -i ~/.ssh/training-2025-ishikawa.pem ishikawa@57.180.48.167
    ```
-4. EC2インスタンス上にイメージをプル
+5. EC2インスタンス上にイメージをプル
    ```
    docker pull <your_dockerhub_username>/<your_repository_name>:latest
    ```
-5. Dockerコンテナの実行
+6. Dockerコンテナの実行
    ```
    #EC2インスタンスの80番ポートをコンテナの80番ポートにマッピング
    docker run -d -it --name IT-training -p 80:80 <your_dockerhub_username>/<your_repository_name>:latest
    ```
-6. EC2インスタンスのパブリックIPアドレスを確認→ブラウザで表示
+7. EC2インスタンスのパブリックIPアドレスを確認→ブラウザで表示
    ```
-   curl -s ifconfig.me
+   http://<リモート環境のIPアドレスまたはDNS名>:<ホスト側のポート>/
    ```
 
 ## 構成ファイルの編集（イメージの再ビルド）
@@ -1429,8 +1439,8 @@ Webページに動きのある機能を追加
 
 <br/>
 
-※混乱してしまったら諦めて作り直す⇩
-<details><summary>クリックで表示</summary>
+
+<details><summary>最終実行手順（自分用）</summary>
 イメージ名・ポート番号等を新たに設定し、新しくコンテナ作り直す（上記の手順を一周する）
 
 1. ローカルのDockerfileのあるディレクトリに移動
@@ -1442,7 +1452,7 @@ Webページに動きのある機能を追加
    ```
    docker build -t todo3 .
    ```
-4. ローカルでDockerコンテナ起動、確認
+4. ローカルでDockerコンテナ起動、`http://localhost:<ホストポート番号>`で確認
    ```
    #ホストのポート番号注意
    docker run -d -p 8084:80 todo3
@@ -1477,6 +1487,14 @@ Webページに動きのある機能を追加
 <br/>
 
 ### ローカルストレージ
+- 主要なブラウザで提供されている簡易的なデータベース
+- オリジン（プロトコル＋ドメイン＋ポート）ごとにキー：値のペアを永続的に保存できる
+  - 永続性：キャッシュ削除しない限り残る
+  - 文字列保存：文字型のみ保存可能（それ以外はJSON化）
+  - 独立性：サーバーとのやりとりなし
+  - 分離性：Webサイト（オリジン）を認識し、別のサイトからは閲覧できないように
+  - 同期：データの読み書きは同期的に行われる
+- 今回のToDoリストでは、「ページのリロードやブラウザを閉じる操作をしても、タスク情報が保持される」ことに使われている
 
 <br/>
 
